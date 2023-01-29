@@ -1,0 +1,68 @@
+import random
+
+Max_Guess = 10
+Len_Num = 3
+
+
+def main():
+  while True:
+    secretcode = getsecretCode()
+    print("I have the number")
+    print("choose a number which is {} long".format(Len_Num))
+    NumGuess = 1
+    while (NumGuess <= Max_Guess):
+      guess = ''
+      print('Guess  #{}'.format(NumGuess))
+      while ((len(guess) != Len_Num) or  (guess.isdigit())):
+        guess = input('>  ')
+
+      clues = getClues(guess, secretcode)
+      print(clues)
+
+      NumGuess += 1
+      if secretcode==guess:
+        break
+      if NumGuess>Max_Guess:
+        print("You ran out of guesses")
+        print("The correct answer was {}".format(secretcode))
+        
+
+    if not input('> ').lower().startswith('y'):
+            break
+
+
+def getsecretCode():
+  alphabets = list('abcdefghijk')
+  random.shuffle(alphabets)
+  secretCode = ''
+  for i in range(Len_Num):
+    secretCode += alphabets[i]
+  return secretCode
+
+
+def getClues(guess, secretCode):
+
+  if (secretCode == guess):
+    answer="you've got the answer"
+    return answer
+    
+  cluesone = []
+  
+  for i in range(len(guess)):
+    if secretCode[i] == guess[i]:
+      cluesone.append('fermi')
+    elif guess[i] in secretCode:
+      cluesone.append('pico')
+      
+
+  if not len(cluesone):i
+    return "bagels"
+    
+
+  cluesone.sort()
+  return ' '.join(cluesone)
+
+
+if __name__ == '__main__':
+  main()
+
